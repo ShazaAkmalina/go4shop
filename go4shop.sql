@@ -104,9 +104,10 @@ SET FOREIGN_KEY_CHECKS=1;
 -- Dumping data for table `logins`
 --
 
-INSERT INTO `logins` (`id`, `customer_id`, `username`, `email`, `password`, `trn_date`) VALUES
-(4, 0, 'rafa', 'rafa@hotmail.com', '35cd2d0d62d9bc5e60a3ca9f7593b05b', '2016-09-09 21:07:29'),
-(5, 0, 'rafa1', 'rafa1@hotmail.com', '9c00ae25f7d4dd6a6a332f60804d0841', '2016-09-10 14:10:49');
+INSERT INTO `logins` (`id`, `customer_id`, `username`, `email`, `password`, `trn_date`, `access_level`) VALUES
+(0, 'rafa', 'rafa@hotmail.com', '35cd2d0d62d9bc5e60a3ca9f7593b05b', '2016-09-09 21:07:29', 1),
+(0, 'rafa1', 'rafa1@hotmail.com', '9c00ae25f7d4dd6a6a332f60804d0841', '2016-09-10 14:10:49', 1);
+(0, 'admin', 'admin@go4shop.com', '21232f297a57a5a743894a0e4a801fc3', '2016-09-10 14:10:49', 0);
 
 -- --------------------------------------------------------
 

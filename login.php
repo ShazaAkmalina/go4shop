@@ -37,38 +37,35 @@
 //}
 //}
 
-
-
 require('config.php');
 session_start();
-    if (isset($_POST['username'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $username = stripslashes($username);
-        $username = mysql_real_escape_string($username);
-        $password = stripslashes($password);
-        $password = mysql_real_escape_string($password);
-        $query = "SELECT * FROM logins WHERE username='$username' and password='".md5($password)."'";
-    	$result = mysql_query($query) or die(mysql_error());
-    	$rows = mysql_num_rows($result);
-        if($rows==1){
-        	$_SESSION['username'] = $username;
-        	header("Location: index.php");
-            $_SESSION['SESS_LOGGEDIN'] = 1;
-            $_SESSION['SESS_USERNAME'] = $rows['username'];
-            $_SESSION['SESS_USERID'] = $rows['id'];
-            $ordersql = "SELECT id FROM orders WHERE customer_id = " . $_SESSION['SESS_USERID'] . " AND status < 2";
-            $orderres = mysql_query($ordersql);
-            $orderrow = mysql_fetch_assoc($orderres);
-            $_SESSION['SESS_ORDERNUM'] = $orderrow['id'];
-            header("Location: " . $config_basedir);
-            }
-            else{
-            require('header.php');
-        	echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
-	  }
+if (isset($_POST['username'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $username = stripslashes($username);
+    $username = mysql_real_escape_string($username);
+    $password = stripslashes($password);
+    $password = mysql_real_escape_string($password);
+    $query = "SELECT * FROM logins WHERE username='$username' and password='".md5($password)."'";
+	$result = mysql_query($query) or die(mysql_error());
+	$rows = mysql_num_rows($result);
+    if($rows==1){
+    	$_SESSION['username'] = $username;
+    	header("Location: index.php");
+        $_SESSION['SESS_LOGGEDIN'] = 1;
+        $_SESSION['SESS_USERNAME'] = $rows['username'];
+        $_SESSION['SESS_USERID'] = $rows['id'];
+        $ordersql = "SELECT id FROM orders WHERE customer_id = " . $_SESSION['SESS_USERID'] . " AND status < 2";
+        $orderres = mysql_query($ordersql);
+        $orderrow = mysql_fetch_assoc($orderres);
+        $_SESSION['SESS_ORDERNUM'] = $orderrow['id'];
+        header("Location: " . $config_basedir);
     }else{
-require("header.php");
+        require('header.php');
+    	echo "<div class='form'><h3>Username/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
+    }
+}else{
+    require("header.php");
 ?> 
 <h1>Login</h1>
 <form action="" method="post" name="login">

@@ -22,22 +22,6 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `admins`
---
-
-CREATE TABLE `admins` (
-  `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `admins`
---
-
-INSERT INTO `admins` (`id`, `username`, `password`) VALUES
-(1, 'race512', '12345678');
 
 -- --------------------------------------------------------
 
@@ -103,14 +87,18 @@ CREATE TABLE `delivery_addresses` (
 -- Table structure for table `logins`
 --
 
+DROP TABLE IF EXISTS `logins`;
 CREATE TABLE `logins` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `trn_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `trn_date` datetime NOT NULL,
+  `access_level` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+SET FOREIGN_KEY_CHECKS=1;
 
 --
 -- Dumping data for table `logins`
